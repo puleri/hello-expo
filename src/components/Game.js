@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import RandomNumber from './RandomNumber';
+
 export default function App(props) {
   const randomNumbers = Array
     .from({ length: props.randomNumberCount })
@@ -12,9 +14,11 @@ export default function App(props) {
   return (
     <View style={styles.container}>
       <Text style={styles.target}>{target}</Text>
-      {randomNumbers.map((randomNumber, index) =>
-        <Text style={styles.choice} key={index}>{randomNumber}</Text>
-      )}
+      <View style={styles.choiceContainer}>
+        {randomNumbers.map((randomNumber, index) =>
+          <RandomNumber key={index} number={randomNumber} />
+        )}
+      </View>
     </View>
   );
 }
@@ -23,16 +27,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'pink',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   target: {
     fontSize: 60,
-    color: 'cornflowerblue'
+    color: 'cornflowerblue',
+    textAlign: 'center',
+    margin: 50
+  },
+  choiceContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around'
   },
   choice: {
-    marginTop: 60,
+    width: 100,
+    textAlign: 'center',
+    marginHorizontal: 15,
+    marginVertical: 50,
     fontSize: 29,
-    color: 'cornflowerblue'
+    color: 'cornflowerblue',
   }
 });
